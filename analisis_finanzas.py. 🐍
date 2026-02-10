@@ -45,3 +45,4 @@ print("\n¡Gráfico guardado como 'grafico_bitcoin.png'!")
 # 4. Guardar en Excel
 datos.to_excel("analisis_bitcoin_detallado.xlsx")
 pip install matplotlib
+python analisis_finanzas.py
