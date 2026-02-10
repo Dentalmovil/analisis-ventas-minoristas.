@@ -46,3 +46,36 @@ print("\n¡Gráfico guardado como 'grafico_bitcoin.png'!")
 datos.to_excel("analisis_bitcoin_detallado.xlsx")
 pip install matplotlib
 python analisis_finanzas.py
+import yfinance as yf
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. Lista de activos a comparar
+activos = ["BTC-USD", "GC=F"]
+periodo = "1mo"
+
+# Creamos un "escritor" de Excel para guardar varias hojas
+with pd.ExcelWriter("comparativa_finanzas.xlsx") as writer:
+    
+    for ticker in activos:
+        print(f"\n--- Procesando: {ticker} ---")
+        
+        # Descarga
+        datos = yf.download(ticker, period=periodo, interval="1d")
+        
+        # Resumen en terminal
+        print(datos['Close'].describe())
+        
+        # Guardar en una hoja específica del Excel
+        datos.to_excel(writer, sheet_name=ticker)
+        
+        # Generar gráfico individual
+        plt.figure(figsize=(10, 4))
+        plt.plot(datos['Close'], label=f'Precio {ticker}')
+        plt.title(f'Tendencia de {ticker}')
+        plt.legend()
+        plt.savefig(f"grafico_{ticker}.png")
+        plt.close() # Cerramos el gráfico para que no se encime con el siguiente
+
+print("\n¡Proceso completado! Revisa 'comparativa_finanzas.xlsx' y las nuevas imágenes.")
+
