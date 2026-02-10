@@ -1,0 +1,15 @@
+import yfinance as yf
+import pandas as pd
+
+# 1. Definimos el símbolo y el periodo
+ticker = "BTC-USD"
+
+# 2. Descargamos los datos (por ejemplo, el último mes)
+print(f"Descargando datos de {ticker}...")
+datos = yf.download(ticker, period="1mo", interval="1d")
+
+# 3. Guardamos los datos en un archivo de Excel
+nombre_archivo = "analisis_bitcoin.xlsx"
+datos.to_excel(nombre_archivo)
+
+print(f"¡Listo! Los datos se han guardado en {nombre_archivo}")
