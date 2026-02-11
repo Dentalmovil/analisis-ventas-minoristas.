@@ -79,3 +79,32 @@ with pd.ExcelWriter("comparativa_finanzas.xlsx") as writer:
 
 print("\n¡Proceso completado! Revisa 'comparativa_finanzas.xlsx' y las nuevas imágenes.")
 
+import yfinance as yf
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. Definimos los activos (Bitcoin, Oro, S&P 500)
+activos = ["BTC-USD", "GC=F", "^GSPC"]
+periodo = "1mo"
+
+# 2. Descargamos y normalizamos
+df_comparativo = pd.DataFrame()
+
+for ticker in activos:
+    datos = yf.download(ticker, period=periodo)['Close']
+    # Normalizamos: (Precio / Primer Precio) * 100
+    df_comparativo[ticker] = (datos / datos.iloc[0]) * 100
+
+# 3. Graficamos la comparación
+plt.figure(figsize=(12, 6))
+for columna in df_comparativo.columns:
+    plt.plot(df_comparativo[columna], label=columna)
+
+plt.title('Comparativa Normalizada (Base 100): BTC vs Oro vs S&P 500')
+plt.ylabel('Rendimiento Relativo (%)')
+plt.legend()
+plt.grid(True)
+plt.savefig("comparativa_mercado.png")
+plt.show()
+
+print("Análisis completado. Revisa 'comparativa_mercado.png'")
