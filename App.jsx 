@@ -59,3 +59,5 @@ export default function App() {
   return <Card />
 }
 src/App.jsx.
+npm run dev
+
