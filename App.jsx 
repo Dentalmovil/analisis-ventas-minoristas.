@@ -60,4 +60,64 @@ export default function App() {
 }
 src/App.jsx.
 npm run dev
+import { useState } from 'react';
+
+export default function App() {
+  const [task, setTask] = useState("");
+  const [todos, setTodos] = useState([]);
+
+  const addTask = (e) => {
+    e.preventDefault();
+    if (!task.trim()) return;
+    setTodos([...todos, { id: Date.now(), text: task }]);
+    setTask(""); // Limpia el input
+  };
+
+  const deleteTask = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  return (
+    <div style={{ 
+      maxWidth: '400px', margin: '50px auto', padding: '20px', 
+      fontFamily: 'system-ui', backgroundColor: '#f9f9f9', borderRadius: '15px' 
+    }}>
+      <h2 style={{ color: '#333' }}>Mis Tareas 🎯</h2>
+      
+      <form onSubmit={addTask} style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+        <input 
+          type="text" 
+          value={task} 
+          onChange={(e) => setTask(e.target.value)}
+          placeholder="¿Qué sigue?"
+          style={{ padding: '10px', flexGrow: 1, borderRadius: '8px', border: '1px solid #ccc' }}
+        />
+        <button type="submit" style={{ 
+          padding: '10px', backgroundColor: '#61dafb', border: 'none', 
+          borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' 
+        }}>Añadir</button>
+      </form>
+
+      <ul style={{ listStyle: 'none', padding: 0 }}>
+        {todos.map(todo => (
+          <li key={todo.id} style={{ 
+            display: 'flex', justifyContent: 'space-between', padding: '10px',
+            backgroundColor: 'white', marginBottom: '8px', borderRadius: '8px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+          }}>
+            {todo.text}
+            <button 
+              onClick={() => deleteTask(todo.id)}
+              style={{ background: 'none', border: 'none', color: '#ff4d4d', cursor: 'pointer' }}
+            >
+              ✕
+            </button>
+          </li>
+        ))}
+      </ul>
+      
+      {todos.length === 0 && <p style={{ textAlign: 'center', color: '#888' }}>¡No hay tareas pendientes!</p>}
+    </div>
+  );
+}
 
