@@ -1,6 +1,7 @@
  # Análisis del Mercado Digital.     
 
 Tipos de Activos:
+
 ​El mercado se divide principalmente por la función que cumple cada moneda. El activo más importante es Bitcoin (BTC), diseñado para ser una moneda digital limitada (solo habrá 21 millones), lo que lo hace resistente a la inflación.
 ​Para entender esto mejor, imagina que Bitcoin es como un metal precioso. Si el oro es valioso porque es difícil de encontrar y hay una cantidad limitada en la Tierra, ¿qué crees que pasaría con el precio de Bitcoin si de repente millones de personas nuevas quisieran comprarlo, sabiendo que nunca habrá más de 21 millones de monedas?
 ​A. El precio bajaría porque habría demasiada demanda.
