@@ -58,3 +58,4 @@ const Card = () => (
 export default function App() {
   return <Card />
 }
+src/App.jsx.
